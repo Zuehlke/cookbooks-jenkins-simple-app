@@ -1,7 +1,7 @@
 
-# Simple Jenkins CI Application Cookbook
+# Simple Jenkins Application Cookbook
 
-An application cookbook for setting up Jenkins CI.
+An application cookbook for setting up a simple / minimal Jenkins CI server.
 
 ## Goals
 
