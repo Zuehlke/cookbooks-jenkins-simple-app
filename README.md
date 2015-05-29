@@ -16,6 +16,29 @@ An application cookbook for setting up a simple / minimal Jenkins CI server.
 
 ## Usage
 
+## Development
+
+First, you need to install the required gems:
+```
+W:\repo\cookbook-jenkins-simple-app>bundle install
+...
+```
+
+Next, you can look at the predefined Rake tasks:
+```
+W:\repo\cookbook-jenkins-simple-app>rake -T
+rake codestyle    # check code style with rubocop
+rake foodcritic   # run foodcritic lint checks
+rake integration  # run test-kitchen integration tests
+rake release      # release the cookbook (metadata, tag, push)
+rake spec         # run chefspec examples
+rake test         # run all unit-level tests
+```
+
+For example, you can run `rake test` to run all the unit level spec tests and linting checks.
+
+Or you run `rake integration` to run all the kitchenci integration tests.
+
 ## Contributing
 
 ## License
