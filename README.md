@@ -70,7 +70,10 @@ The differences are subtle: while 1) is more lightweight and starts up faster, 2
 
 ### Developing on Windows
 
-If you are running on Windows, you can use this too! Make sure you have the latest version of the [Bill's Kitchen DevPack](https://github.com/tknerr/bills-kitchen) and run `b2d-start` to start the boot2docker VM in the background (it will act as a remote docker host in this case).
+If you are running on Windows, you can use Docker  too! Make sure you have the latest version of the [Bill's Kitchen DevPack](https://github.com/tknerr/bills-kitchen), then:
+
+* run `b2d-start` to start the boot2docker VM in the background (it will act as a remote docker host)
+* access the docker containers via 192.168.59.103 (the `boot2docker ip`) instead of localhost
 
 ## Contributing
 
