@@ -49,13 +49,26 @@ $ rake integration
 
 ### Integration Testing with Docker
 
-As we all know running the kitchenci integration tests on VirtualBox takes a while, but we can do better. Running them with Docker gives you a way much faster turnaround. So here's how to do it:
+As we all know running the kitchenci integration tests on VirtualBox takes a while, but we can do better. Running them with Docker gives you a way much faster turnaround. So here's how to do it.
+
+Option 1) using the [kitchen-docker](https://github.com/portertech/kitchen-docker) driver:
 ```
-$ set VAGRANT_DEFAULT_PROVIDER=docker
 $ set KITCHEN_LOCAL_YAML=.kitchen.docker.yml
 $ rake integration
 ...
 ```
+
+Option 2) using the [kitchen-vagrant](https://github.com/test-kitchen/kitchen-vagrant) driver:
+```
+$ vagrant box add opscode-ubuntu-14.04 https://atlas.hashicorp.com/tknerr/boxes/baseimage-ubuntu-14.04/versions/1.0.0/providers/docker.box --provider=docker
+$ set VAGRANT_DEFAULT_PROVIDER=docker
+$ rake integration
+...
+```
+
+The differences are subtle: while 1) is more lightweight and starts up faster, 2) can cache downloaded files via vagrant-cachier.
+
+### Developing on Windows
 
 If you are running on Windows, you can use this too! Make sure you have the latest version of the [Bill's Kitchen DevPack](https://github.com/tknerr/bills-kitchen) and run `b2d-start` to start the boot2docker VM in the background (it will act as a remote docker host in this case).
 
