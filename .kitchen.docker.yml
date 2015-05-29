@@ -10,6 +10,3 @@ driver_config:
   use_sudo: false
   forward:
     - 8080:8080
-
-platforms:
-- name: ubuntu-14.04
