@@ -1,7 +1,7 @@
 
 # Simple Jenkins Application Cookbook
 
-[![Circle CI](https://circleci.com/gh/Zuehlke/cookbook-jenkins-simple-app/tree/master.svg?style=shield)](https://circleci.com/gh/Zuehlke/cookbook-jenkins-simple-app/tree/master)
+[![Circle CI](https://circleci.com/gh/Zuehlke/cookbooks-jenkins-simple-app/tree/master.svg?style=shield)](https://circleci.com/gh/Zuehlke/cookbooks-jenkins-simple-app/tree/master)
 
 
 An application cookbook for setting up a simple / minimal Jenkins CI server.
