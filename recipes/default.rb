@@ -7,7 +7,6 @@
 # Copyright (c) 2015 Torben Knerr
 #
 
-
 # XXX: this currently fails with older versions due to https://issues.jenkins-ci.org/browse/INFRA-77
 # => could be fixed via http://stackoverflow.com/a/9898849/2388971
 node.set['jenkins']['master']['install_method'] = 'package'
