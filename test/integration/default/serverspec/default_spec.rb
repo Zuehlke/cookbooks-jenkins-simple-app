@@ -21,4 +21,24 @@ describe 'jenkins-simple-app::default' do
     expect(cmd.stdout).to include 'Jenkins ver. 1.609.1'
   end
 
+  it 'installs some jenkins plugins' do
+    query_params = 'depth=1&xpath=/*/*/shortName|/*/*/version&wrapper=plugins'
+    response = command("wget -qO- 'localhost:8080/pluginManager/api/xml?#{query_params}'").stdout
+    verify_plugin_installed response, 'git', '2.3.5'
+    verify_plugin_installed response, 'greenballs', '1.14'
+    verify_plugin_installed response, 'ansicolor', '0.4.1'
+    verify_plugin_installed response, 'chucknorris', '0.5'
+    verify_plugin_installed response, 'envinject', '1.91.3'
+    verify_plugin_installed response, 'job-dsl', '1.34'
+    verify_plugin_installed response, 'jobConfigHistory', '2.11'
+    verify_plugin_installed response, 'build-name-setter', '1.3'
+    verify_plugin_installed response, 'delivery-pipeline-plugin', '0.9.4'
+    verify_plugin_installed response, 'parameterized-trigger', '2.26'
+    verify_plugin_installed response, 'rebuild', '1.24'
+  end
+
+  def verify_plugin_installed(response, plugin, version)
+    expect(response).to include "<shortName>#{plugin}</shortName><version>#{version}</version>"
+  end
+
 end
