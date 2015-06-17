@@ -7,6 +7,9 @@
 # Copyright (c) 2015 Torben Knerr
 #
 
+node.set['git']['version'] = '1.9.1'
+include_recipe 'git'
+
 # XXX: this currently fails with older versions due to https://issues.jenkins-ci.org/browse/INFRA-77
 # => could be fixed via http://stackoverflow.com/a/9898849/2388971
 node.set['jenkins']['master']['install_method'] = 'package'
@@ -14,7 +17,6 @@ node.set['jenkins']['master']['repository'] = 'http://pkg.jenkins-ci.org/debian-
 node.set['jenkins']['master']['repository_key'] = 'http://pkg.jenkins-ci.org/debian-stable/jenkins-ci.org.key'
 node.set['jenkins']['master']['version'] = '1.609.1'
 
-# install jenkins server
 include_recipe 'jenkins::master'
 
 # install plugins
@@ -35,5 +37,25 @@ plugins.each do |plugin_name, plugin_version|
   jenkins_plugin plugin_name do
     version plugin_version
     notifies :restart, 'service[jenkins]', :delayed
+  end
+end
+
+# configure job
+if node['jenkins_simple_app']['git_repository_url']
+  xml = File.join(Chef::Config[:file_cache_path], 'JenkinsSeedJob-config.xml')
+
+  template xml do
+    source 'JenkinsSeedJob.xml.erb'
+  end
+
+  # Create a jenkins job (default action is `:create`)
+  jenkins_job 'SeedJob' do
+    config xml
+  end
+
+  # run the seed buildjob
+  http_request 'execute_seed_Job' do
+    url 'http://localhost:8080/job/SeedJob/build?delay=0sec'
+    action :get
   end
 end
