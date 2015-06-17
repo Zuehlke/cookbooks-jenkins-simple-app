@@ -14,7 +14,7 @@ node.set['jenkins']['master']['repository'] = 'http://pkg.jenkins-ci.org/debian-
 node.set['jenkins']['master']['repository_key'] = 'http://pkg.jenkins-ci.org/debian-stable/jenkins-ci.org.key'
 node.set['jenkins']['master']['version'] = '1.609.1'
 
-# install jenkins server
+
 include_recipe 'jenkins::master'
 
 # install plugins
@@ -36,4 +36,17 @@ plugins.each do |plugin_name, plugin_version|
     version plugin_version
     notifies :restart, 'service[jenkins]', :delayed
   end
+end
+
+#configute job
+
+xml = File.join(Chef::Config[:file_cache_path], 'HelloWorld-config.xml')
+
+cookbook_file xml do
+  source 'HelloWorldJob.xml'
+end
+
+# Create a jenkins job (default action is `:create`)
+jenkins_job 'HelloWorld' do
+  config xml
 end
