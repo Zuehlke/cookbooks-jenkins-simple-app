@@ -41,9 +41,12 @@ describe 'jenkins-simple-app::default' do
     expect(response).to include "<shortName>#{plugin}</shortName><version>#{version}</version>"
   end
 
-  it 'git client installed' do
-    cmd = command('git --version')
-    expect(cmd.stdout).to include 'git version 1.9.1'
+  it 'git version installed' do
+    expect(command('git --version').stdout).to include 'git version 1.9.1'
+  end
+
+  it 'jenkins package installed' do
+    expect(package('jenkins')).to be_installed.with_version('1.609.1')
   end
 
 end
