@@ -41,7 +41,7 @@ plugins.each do |plugin_name, plugin_version|
 end
 
 # configure job
-if node['jenkins_simple_app']['git_repository_url'] != nil
+if node['jenkins_simple_app']['git_repository_url']
   xml = File.join(Chef::Config[:file_cache_path], 'JenkinsSeedJob-config.xml')
 
   template xml do
