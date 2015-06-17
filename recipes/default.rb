@@ -39,15 +39,21 @@ plugins.each do |plugin_name, plugin_version|
   end
 end
 
-#configute job
+# configure job
 
-xml = File.join(Chef::Config[:file_cache_path], 'HelloWorld-config.xml')
+xml = File.join(Chef::Config[:file_cache_path], 'JenkinsSeedJob-config.xml')
 
 cookbook_file xml do
-  source 'HelloWorldJob.xml'
+  source 'JenkinsSeedJob.xml'
 end
 
 # Create a jenkins job (default action is `:create`)
-jenkins_job 'HelloWorld' do
+jenkins_job 'SeedJob' do
   config xml
+end
+
+# run the seed buildjob
+execute 'execute_seed_Job' do
+  command 'wget http://localhost:8080/job/SeedJob/build?delay=0sec'
+  action :run
 end
