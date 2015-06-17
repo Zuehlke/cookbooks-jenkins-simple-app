@@ -49,4 +49,8 @@ describe 'jenkins-simple-app::default' do
     expect(package('jenkins')).to be_installed.with_version('1.609.1')
   end
 
+  it 'created the seed job in jenkins' do
+    cmd = command('wget -qO- localhost:8080/api/xml')
+    expect(cmd.stdout).to include '<name>SeedJob</name>'
+  end
 end

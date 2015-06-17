@@ -41,20 +41,21 @@ plugins.each do |plugin_name, plugin_version|
 end
 
 # configure job
+if node['jenkins_simple_app']['git_repository_url'] != nil
+  xml = File.join(Chef::Config[:file_cache_path], 'JenkinsSeedJob-config.xml')
 
-xml = File.join(Chef::Config[:file_cache_path], 'JenkinsSeedJob-config.xml')
+  template xml do
+    source 'JenkinsSeedJob.xml.erb'
+  end
 
-template xml do
-  source 'JenkinsSeedJob.xml.erb'
-end
+  # Create a jenkins job (default action is `:create`)
+  jenkins_job 'SeedJob' do
+    config xml
+  end
 
-# Create a jenkins job (default action is `:create`)
-jenkins_job 'SeedJob' do
-  config xml
-end
-
-# run the seed buildjob
-http_request 'execute_seed_Job' do
-  url 'http://localhost:8080/job/SeedJob/build?delay=0sec'
-  action :get
+  # run the seed buildjob
+  http_request 'execute_seed_Job' do
+    url 'http://localhost:8080/job/SeedJob/build?delay=0sec'
+    action :get
+  end
 end
