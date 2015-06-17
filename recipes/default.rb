@@ -7,6 +7,7 @@
 # Copyright (c) 2015 Torben Knerr
 #
 
+node.set['git']['version'] = '1.9.1'
 include_recipe 'git'
 
 # XXX: this currently fails with older versions due to https://issues.jenkins-ci.org/browse/INFRA-77
