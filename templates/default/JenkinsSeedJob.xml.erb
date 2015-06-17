@@ -18,7 +18,7 @@
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
- <url>http://github.com/CatCalZone/jenkins-jobs.git</url>
+ <url><%= node['jenkins_simple_app']['git_repository_url'] %></url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>

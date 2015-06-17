@@ -43,8 +43,8 @@ end
 
 xml = File.join(Chef::Config[:file_cache_path], 'JenkinsSeedJob-config.xml')
 
-cookbook_file xml do
-  source 'JenkinsSeedJob.xml'
+template xml do
+  source 'JenkinsSeedJob.xml.erb'
 end
 
 # Create a jenkins job (default action is `:create`)
