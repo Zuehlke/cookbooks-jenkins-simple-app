@@ -53,7 +53,7 @@ jenkins_job 'SeedJob' do
 end
 
 # run the seed buildjob
-execute 'execute_seed_Job' do
-  command 'wget http://localhost:8080/job/SeedJob/build?delay=0sec'
-  action :run
+http_request 'execute_seed_Job' do
+  url 'http://localhost:8080/job/SeedJob/build?delay=0sec'
+  action :get
 end
