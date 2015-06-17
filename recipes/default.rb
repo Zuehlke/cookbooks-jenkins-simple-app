@@ -59,3 +59,21 @@ if node['jenkins_simple_app']['git_repository_url']
     action :get
   end
 end
+
+# block until jenkins is up & ready
+ruby_block 'block_until_operational' do
+  block do
+    until IO.popen('netstat -lnt').entries.select { |e| e.split[3] =~ /:8080$/ }.size == 1
+      Chef::Log.debug 'service[jenkins] not listening on port 8080'
+      sleep 1
+    end
+    loop do
+      url = URI.parse('http://localhost:8080/job/SeedJob/config.xml')
+      res = Chef::REST::RESTRequest.new(:GET, url, nil).call
+      break if res.is_a?(Net::HTTPSuccess) || res.is_a?(Net::HTTPNotFound)
+      Chef::Log.debug "service[jenkins] not responding OK to GET /job/SeedJob/config.xml #{res.inspect}"
+      sleep 1
+    end
+  end
+  subscribes :create, 'service[jenkins]', :immediately
+end
