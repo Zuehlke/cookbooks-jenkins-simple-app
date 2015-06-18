@@ -11,6 +11,6 @@ describe 'jenkins-simple-app::java_slave' do
   end
 
   it 'installs Maven 3.3.3' do
-    expect(command('mvn -v').stdout).to include 'Apache Maven 3.3.3'
+    expect(command('bash -l -c "mvn -v"').stdout).to include 'Apache Maven 3.3.3'
   end
 end
