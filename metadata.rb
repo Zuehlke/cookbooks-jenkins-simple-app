@@ -8,3 +8,4 @@ version '0.1.0'
 
 depends 'jenkins', '2.3.1'
 depends 'git', '4.2.2'
+depends 'apt', '2.7.0'
