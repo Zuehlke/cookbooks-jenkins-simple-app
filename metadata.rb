@@ -13,3 +13,4 @@ depends 'apt', '2.7.0'
 
 # for the slaves
 depends 'java', '1.31.0'
+depends 'maven', '1.3.0'
