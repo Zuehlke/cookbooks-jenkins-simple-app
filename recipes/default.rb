@@ -7,6 +7,10 @@
 # Copyright (c) 2015 Torben Knerr
 #
 
+# refresh apt cache
+include_recipe 'apt'
+
+# install jenkins
 node.set['git']['version'] = '1.9.1'
 include_recipe 'git'
 
@@ -16,7 +20,6 @@ node.set['jenkins']['master']['install_method'] = 'package'
 node.set['jenkins']['master']['repository'] = 'http://pkg.jenkins-ci.org/debian-stable'
 node.set['jenkins']['master']['repository_key'] = 'http://pkg.jenkins-ci.org/debian-stable/jenkins-ci.org.key'
 node.set['jenkins']['master']['version'] = '1.609.1'
-
 include_recipe 'jenkins::master'
 
 # install plugins
