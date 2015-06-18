@@ -1,4 +1,7 @@
 
+# refresh apt cache
+include_recipe 'apt'
+
 # install java
 node.set['java']['install_flavor'] = 'oracle'
 node.set['java']['jdk_version'] = '8'

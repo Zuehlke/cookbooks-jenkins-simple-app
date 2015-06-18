@@ -27,6 +27,9 @@ platforms:
 
 suites:
   - name: default
+    driver_config:
+      network:
+        - ["forwarded_port", {guest: 8080, host: 8080}]
     run_list:
       - recipe[jenkins-simple-app::default]
     attributes:
