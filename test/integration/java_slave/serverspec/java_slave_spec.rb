@@ -7,6 +7,6 @@ describe 'jenkins-simple-app::java_slave' do
   end
 
   it 'sets JAVA_HOME correctly' do
-    expect(command('echo $JAVA_HOME').stdout).to include '/usr/lib/jvm/java-8-oracle-amd64'
+    expect(command('bash -l -c "echo \$JAVA_HOME"').stdout).to include '/usr/lib/jvm/java-8-oracle-amd64'
   end
 end
