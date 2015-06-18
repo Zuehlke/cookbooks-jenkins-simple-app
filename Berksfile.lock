@@ -1,0 +1,17 @@
+DEPENDENCIES
+  jenkins-simple-app
+    path: .
+    metadata: true
+
+GRAPH
+  apt (2.7.0)
+  jenkins (2.3.1)
+    apt (~> 2.0)
+    runit (~> 1.5)
+    yum (~> 3.0)
+  jenkins-simple-app (0.1.0)
+    jenkins (= 2.3.1)
+  packagecloud (0.0.18)
+  runit (1.6.0)
+    packagecloud (>= 0.0.0)
+  yum (3.6.0)
