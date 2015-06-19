@@ -12,4 +12,5 @@ include_recipe 'java'
 node.set['maven']['version'] = '3'
 node.set['maven']['3']['version'] = '3.3.3'
 node.set['maven']['install_java'] = false
+node.from_file(run_context.resolve_attribute("maven", "default"))
 include_recipe 'maven'
