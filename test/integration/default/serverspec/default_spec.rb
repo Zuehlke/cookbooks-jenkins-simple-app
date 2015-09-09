@@ -16,9 +16,9 @@ describe 'jenkins-simple-app::default' do
     expect(port(8080)).to be_listening
   end
 
-  it 'installs jenkins version 1.609.1' do
+  it 'runs the expected version of jenkins' do
     cmd = command('wget -qO- localhost:8080')
-    expect(cmd.stdout).to include 'Jenkins ver. 1.609.1'
+    expect(cmd.stdout).to include 'Jenkins ver. 1.609.3'
   end
 
   it 'installs some jenkins plugins' do
@@ -41,12 +41,12 @@ describe 'jenkins-simple-app::default' do
     expect(response).to include "<shortName>#{plugin}</shortName><version>#{version}</version>"
   end
 
-  it 'git version installed' do
+  it 'installs git at version 1.9.1' do
     expect(command('git --version').stdout).to include 'git version 1.9.1'
   end
 
-  it 'jenkins package installed' do
-    expect(package('jenkins')).to be_installed.with_version('1.609.1')
+  it 'installs jenkins package at version 1.609.3' do
+    expect(package('jenkins')).to be_installed.with_version('1.609.3')
   end
 
   it 'created the seed job in jenkins' do
