@@ -16,9 +16,9 @@ describe 'jenkins-simple-app::default' do
     expect(port(8080)).to be_listening
   end
 
-  it 'installs jenkins version 1.609.1' do
+  it 'installs jenkins version 1.609.3' do
     cmd = command('wget -qO- localhost:8080')
-    expect(cmd.stdout).to include 'Jenkins ver. 1.609.1'
+    expect(cmd.stdout).to include 'Jenkins ver. 1.609.3'
   end
 
   it 'installs some jenkins plugins' do
