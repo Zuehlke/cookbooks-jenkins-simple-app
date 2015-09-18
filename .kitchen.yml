@@ -22,13 +22,18 @@ platforms:
 - name: ubuntu-14.04
   driver_config:
     box: <%= box_for_provider('ubuntu-14.04') %>
-    network:
-      - ["forwarded_port", {guest: 8080, host: 8080}]
 
 suites:
   - name: default
+    driver_config:
+      network:
+        - ["forwarded_port", {guest: 8080, host: 8080}]
     run_list:
       - recipe[jenkins-simple-app::default]
     attributes:
       jenkins_simple_app:
         git_repository_url: http://github.com/CatCalZone/jenkins-jobs.git
+
+  - name: java_slave
+    run_list:
+      - recipe[jenkins-simple-app::java_slave]
