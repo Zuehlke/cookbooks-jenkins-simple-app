@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'jenkins-simple-app::java_slave' do
 
   it 'installs Oracle Java 8 update 31' do
-    expect(command('java -version').stdout).to include '1.8.0_31'
+    expect(command('java -version').stderr).to include '1.8.0_31'
   end
 
   it 'sets JAVA_HOME correctly' do
