@@ -1,18 +1,18 @@
 source 'https://rubygems.org'
 
-gem 'chef', '12.4.1'
-gem 'berkshelf', '3.2.4'
-gem 'stove', '3.2.7'
+gem 'chef', '12.9.41'
+gem 'berkshelf', '4.3.2'
+gem 'stove', '4.0.0'
 
 group :test do
-  gem 'foodcritic', '4.0.0'
-  gem 'rubocop', '0.33.0'
-  gem 'chefspec', '4.3.0'
+  gem 'foodcritic', '6.2.0'
+  gem 'rubocop', '0.40.0'
+  gem 'chefspec', '4.6.1'
 end
 
 group :integration do
-  gem 'test-kitchen', '1.4.2'
-  gem 'kitchen-docker', '2.1.0'
-  gem 'kitchen-vagrant', '0.18.0'
-  gem 'serverspec', '2.21.1'
+  gem 'test-kitchen', '1.8.0'
+  gem 'kitchen-docker', '2.4.0'
+  gem 'kitchen-vagrant', '0.20.0'
+  gem 'serverspec', '2.34.0'
 end

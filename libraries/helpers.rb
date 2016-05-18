@@ -1,4 +1,6 @@
 
+require 'chef/rest'
+
 #
 # returns true if the given port is open, false otherwise
 #
