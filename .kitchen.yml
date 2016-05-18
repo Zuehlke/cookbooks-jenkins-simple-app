@@ -13,7 +13,7 @@ driver:
 
 provisioner:
   name: chef_zero
-  require_chef_omnibus: 12.4.1
+  require_chef_omnibus: 12.9.41
   chef_omnibus_install_options: -d /tmp/vagrant-cache/vagrant_omnibus
   client_rb:
     add_formatter: doc
