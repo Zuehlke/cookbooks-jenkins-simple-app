@@ -10,7 +10,7 @@ dependencies:
   cache_directories:
     - ~/.vagrant.d
   pre:
-    - wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.8.1_x86_64.deb
+    - wget wget https://releases.hashicorp.com/vagrant/1.8.1/vagrant_1.8.1_x86_64.deb
     - sudo dpkg -i vagrant_1.8.1_x86_64.deb
   override:
     - bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3:
