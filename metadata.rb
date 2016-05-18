@@ -1,6 +1,8 @@
 name 'jenkins-simple-app'
 maintainer 'Torben Knerr'
 maintainer_email 'torben.knerr@zuehlke.com'
+source_url 'https://github.com/Zuehlke/cookbooks-jenkins-simple-app'
+issues_url 'https://github.com/Zuehlke/cookbooks-jenkins-simple-app/issues'
 license 'mit'
 description 'Installs/Configures jenkins-simple-app'
 long_description 'Installs/Configures jenkins-simple-app'
