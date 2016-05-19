@@ -20,7 +20,27 @@ node.set['jenkins']['master']['install_method'] = 'package'
 node.set['jenkins']['master']['repository'] = 'http://pkg.jenkins-ci.org/debian'
 node.set['jenkins']['master']['repository_key'] = 'http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key'
 node.set['jenkins']['master']['version'] = '2.5'
+node.set['jenkins']['master']['jvm_options'] = '-Dhudson.diyChunking=false -Djenkins.install.runSetupWizard=false'
 include_recipe 'jenkins::master'
+
+# disable security which is turned on by default in jenkins 2.0
+ruby_block 'disable_security' do
+  block do
+    config_xml = "#{node['jenkins']['master']['home']}/config.xml"
+    Chef::Log.info 'Waiting until Jenkins config.xml file is present'
+    until File.exist?(config_xml)
+      sleep 1
+      Chef::Log.debug('.')
+    end
+    Chef::Util::FileEdit.new(config_xml).search_file_replace_line(
+      '  <useSecurity>true</useSecurity>',
+      '  <useSecurity>false</useSecurity>'
+    ).write_file
+  end
+  action :nothing
+  subscribes :run, 'package[jenkins]', :immediately
+  notifies :restart, 'service[jenkins]', :immediately
+end
 
 # install plugins
 plugins = {
