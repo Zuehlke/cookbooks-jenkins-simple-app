@@ -79,3 +79,26 @@ ruby_block 'block_until_operational' do
   end
   subscribes :create, 'service[jenkins]', :immediately
 end
+
+# Create password credentials
+jenkins_password_credentials 'vagrant' do
+  description 'vagrant user'
+  password    'vagrant'
+end
+
+# create ssh jenkins slave instance
+jenkins_ssh_slave 'executor' do
+  description 'Run test suites'
+  remote_fs   '/tmp/jenkins_slave/executor'
+  labels      ['executor']
+
+  # SSH specific attributes
+  host        '127.0.0.1' # or 'slave.example.org'
+  user        'jenkins'
+  credentials 'vagrant'
+end
+
+# bring jenkins slave online
+jenkins_ssh_slave 'executor' do
+  action :online
+end
